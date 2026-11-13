@@ -1,0 +1,5 @@
+Group,Mean Jaccard,Recovered in,Verdict
+Light buyers,0.96,1.0,very stable
+Bargain hunters,0.948,1.0,very stable
+Regulars,0.933,1.0,very stable
+Big spenders,0.975,1.0,very stable

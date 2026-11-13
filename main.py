@@ -38,6 +38,7 @@ from pxlab.cluster.analysis import (
     relabel_by,
     scale,
 )
+from pxlab.cluster.validate import run_validation
 from pxlab.common import MODELS_FOLDER, save_figure, save_table, set_plot_style, write_results_doc
 
 K_VALUES = range(2, 9)
@@ -141,6 +142,9 @@ def main():
         plot_groups_pca(scale(customers, ALL_INPUTS), labels, names, "Segments on the two main directions of spread"),
         f"{FOLDER}/segments_pca.png",
     )
+
+    print("Validation:")
+    run_validation(scale(customers, ALL_INPUTS), labels, names, k, K_VALUES, FOLDER)
 
     brief_pipeline, brief_labels, brief_names, brief_k = segment(customers, BRIEF_INPUTS, "brief")
     brief_table = segment_table(customers, brief_labels, brief_names, BRIEF_INPUTS).drop(columns="Suggested action")

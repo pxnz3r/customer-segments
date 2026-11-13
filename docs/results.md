@@ -19,6 +19,45 @@ Produced by `python main.py` on 2,215 customers. K-Means with 20 random starts, 
 
 ![segments pca](../outputs/figures/segments/segments_pca.png)
 
+## Validation
+
+### What the checks found
+
+| Finding |
+| --- |
+| Best k by each score: silhouette 2, Calinski-Harabasz 2, Davies-Bouldin 2; k = 4 was used. |
+| Most stable group: Big spenders (mean Jaccard 0.97, very stable); least stable: Regulars (0.93, very stable). |
+| Silhouette 0.350 on the real data against 0.195 on shuffled data with no relationships between inputs: the groups reflect real structure. |
+
+![silhouette diagram](../outputs/figures/segments/silhouette_diagram.png)
+
+### Bootstrap stability of each group (50 draws)
+
+| Group | Mean Jaccard | Recovered in | Verdict |
+| --- | --- | --- | --- |
+| Light buyers | 0.96 | 1.0 | very stable |
+| Bargain hunters | 0.948 | 1.0 | very stable |
+| Regulars | 0.933 | 1.0 | very stable |
+| Big spenders | 0.975 | 1.0 | very stable |
+
+### Real data against shuffled data
+
+| Real silhouette | Shuffled silhouette (mean) | Shuffled silhouette (spread) | Standard deviations above shuffled |
+| --- | --- | --- | --- |
+| 0.35 | 0.195 | 0.002 | 76.585 |
+
+### Three quality scores for each k
+
+| k | Silhouette (higher better) | Calinski-Harabasz (higher better) | Davies-Bouldin (lower better) |
+| --- | --- | --- | --- |
+| 2 | 0.528 | 3768.059 | 0.693 |
+| 3 | 0.388 | 2760.153 | 1.046 |
+| 4 | 0.35 | 2409.467 | 1.058 |
+| 5 | 0.324 | 2140.021 | 1.063 |
+| 6 | 0.289 | 1982.711 | 1.125 |
+| 7 | 0.28 | 1847.83 | 1.114 |
+| 8 | 0.271 | 1724.73 | 1.108 |
+
 ## Choosing k
 
 ![k sweep all](../outputs/figures/segments/k_sweep_all.png)

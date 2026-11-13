@@ -1,0 +1,4 @@
+Finding
+"Best k by each score: silhouette 2, Calinski-Harabasz 2, Davies-Bouldin 2; k = 4 was used."
+"Most stable group: Big spenders (mean Jaccard 0.97, very stable); least stable: Regulars (0.93, very stable)."
+Silhouette 0.350 on the real data against 0.195 on shuffled data with no relationships between inputs: the groups reflect real structure.
