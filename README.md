@@ -1,8 +1,28 @@
-# Customer segments
+<div align="center">
 
-Customer segmentation with K-Means clustering on annual income, spending score and purchasing behaviour. 2,215 customers of a food and drink retailer fall into four segments, each with a marketing action, and the segments are checked against offer acceptance, which they never saw. An interactive demo re-runs the clustering live and places new customers.
+<h1>Customer segments</h1>
 
-![Four segments by income and spending score](outputs/figures/segments/segments_income_spending.png)
+<p>Customer segmentation with K-Means clustering on annual income, spending score and purchasing behaviour. 2,215 customers of a food and drink retailer fall into four segments, each with a marketing action, and the segments are checked against offer acceptance, which they never saw. An interactive demo re-runs the clustering live and places new customers.</p>
+
+<p>
+<a href="https://github.com/pxnz3r/customer-segments/actions/workflows/ci.yml"><img src="https://github.com/pxnz3r/customer-segments/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+<img src="https://img.shields.io/badge/python-3.14-blue" alt="Python 3.14">
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
+</p>
+
+<p><a href="docs/results.md">Results</a> · <a href="docs/methodology.md">Methodology</a> · <a href="docs/deploy.md">Deploy the demo</a></p>
+
+<img src="outputs/figures/segments/segments_income_spending.png" width="720" alt="Four segments by income and spending score">
+
+</div>
+
+## How it works
+
+1. **Load and check** 2,215 customers of a food and drink retailer.
+2. **Choose k** with the elbow and silhouette scores, then group the customers with K-Means.
+3. **Describe each segment** and give it a marketing action.
+4. **Validate the groups**: three internal indices, a silhouette diagram, bootstrap stability and a comparison with shuffled data that has no real groups.
+5. **Place a new customer** in a segment in the Streamlit demo.
 
 ## Results
 
@@ -18,6 +38,16 @@ Customer segmentation with K-Means clustering on annual income, spending score a
 - **Income and spending score alone** (the classic two-input version) give four bands along one diagonal, because the two rise together. Bargain hunters disappear into the two lowest bands; the two groupings agree at only 0.41.
 
 Full tables and figures: [docs/results.md](docs/results.md). How it was done: [docs/methodology.md](docs/methodology.md).
+
+## How sure the results are
+
+**The four segments are real.** Silhouette 0.350 on the real customers against 0.195 on the same data with each column shuffled, which has no true groups.
+
+**They are stable.** Re-running K-Means on 50 bootstrap samples recovers every segment with a mean Jaccard of 0.93 or more (Big spenders 0.97).
+
+**k = 4 is a business choice.** All three internal indices prefer k = 2; four segments are kept because each gets its own marketing action.
+
+Every table and figure behind these is in [docs/results.md](docs/results.md).
 
 ## Run it
 
