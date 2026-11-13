@@ -1,0 +1,16 @@
+{
+  "inputs": [
+    "Annual income",
+    "Spending score",
+    "Purchases",
+    "Deal share"
+  ],
+  "k": 4,
+  "segments": {
+    "1": "Light buyers",
+    "0": "Regulars",
+    "2": "Big spenders",
+    "3": "Bargain hunters"
+  },
+  "customers": 2215
+}

@@ -1,0 +1,5 @@
+Segment,Customers,Share,Annual income,Spending score,Purchases,Deal share,Total spent,Accepted an offer (share),Suggested action
+Light buyers,591,0.27,32600.0,18.47,4.68,0.28,59.29,0.06,"Cheap channels only (email, web). They buy little and rarely respond, so costly campaigns such as printed catalogues don't pay back."
+Bargain hunters,365,0.16,34500.0,31.35,7.55,0.53,160.58,0.18,"Discount and deal campaigns. Half their purchases use one, and they accept offers far more often than other low spenders."
+Regulars,500,0.23,53100.0,55.37,14.14,0.22,527.32,0.1,Cross-sell and bundles to grow the basket: they already buy often but in mid-sized amounts.
+Big spenders,759,0.34,74700.0,81.53,20.06,0.08,1301.59,0.24,"Loyalty perks, premium ranges and early access at full price. They rarely wait for discounts, so discounting them gives margin away."
