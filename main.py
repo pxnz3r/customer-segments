@@ -27,6 +27,7 @@ from customer_segments.report import FOLDER, results_sections
 from customer_segments.segments import action_for, band_names, name_groups
 from pxlab.cluster.analysis import (
     agreement,
+    choose_k_by_stability,
     k_sweep,
     kmeans_pipeline,
     plot_groups_2d,
@@ -36,7 +37,6 @@ from pxlab.cluster.analysis import (
     profiles,
     relabel_by,
     scale,
-    stability,
 )
 from pxlab.common import MODELS_FOLDER, save_figure, save_table, set_plot_style, write_results_doc
 
@@ -46,23 +46,6 @@ K_VALUES = range(2, 9)
 # So k is picked from 3 to 6 by stability: the k whose groups come out the
 # same whatever the random starting centres.
 K_CHOICES = range(3, 7)
-
-
-def choose_k(features):
-    """
-    The k from K_CHOICES whose K-Means groups are most stable across seeds.
-
-    Input:
-        features: the scaled inputs.
-    Returns:
-        (chosen k, table of stability per k).
-    """
-    rows = []
-    for k in K_CHOICES:
-        mean, lowest = stability(features, k)
-        rows.append({"k": k, "Stability (mean)": round(mean, 3), "Stability (lowest)": round(lowest, 3)})
-    table = pd.DataFrame(rows)
-    return int(table.loc[table["Stability (mean)"].idxmax(), "k"]), table
 
 
 def renumbering(pipeline, customers, inputs):
@@ -95,7 +78,7 @@ def segment(customers, inputs, label):
     """
     features = scale(customers, inputs)
     sweep = k_sweep(features, K_VALUES)
-    k, stable = choose_k(features)
+    k, stable = choose_k_by_stability(features, K_CHOICES)
     sweep = sweep.merge(stable, on="k", how="left").round(3)
     save_table(sweep, f"{FOLDER}/k_sweep_{label}.csv")
     if label == "all":

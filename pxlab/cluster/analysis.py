@@ -297,3 +297,24 @@ def plot_dendrogram(features, method, title, cut_k=None):
     axis.set_xlabel("Groups (last 30 merges; numbers are group sizes)")
     axis.set_title(title)
     return figure
+
+
+def choose_k_by_stability(features, k_values):
+    """
+    The k whose K-Means groups come out most alike whatever the random
+    starting centres. Silhouette tends to favour k = 2, which often just
+    splits "more" from "less"; stability picks a k whose groups are real
+    enough to be found again.
+
+    Inputs:
+        features: the scaled inputs.
+        k_values: the k to consider.
+    Returns:
+        (chosen k, table of mean and lowest agreement per k).
+    """
+    rows = []
+    for k in k_values:
+        mean, lowest = stability(features, k)
+        rows.append({"k": k, "Stability (mean)": round(mean, 3), "Stability (lowest)": round(lowest, 3)})
+    table = pd.DataFrame(rows)
+    return int(table.loc[table["Stability (mean)"].idxmax(), "k"]), table
